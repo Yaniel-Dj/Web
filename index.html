@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AzerothCore - Wrath of the Lich King</title>
+    <meta name="description" content="Únete al mejor servidor privado de WoW WotLK 3.3.5a. Disfruta de rates x1, scripts personalizados y una economía balanceada. ¡Descarga el cliente y juega ya!">
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            /* Fondo temático WotLK: Azul oscuro con destellos helados */
+            background-color: #050a14;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(30, 77, 156, 0.4) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(5, 10, 20, 0.8) 0%, rgba(5, 10, 20, 1) 100%);
+            color: #e6e8ee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- ENCABEZADO (HEADER) --- */
+        header {
+            width: 100%;
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at top, rgba(100, 180, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: #f0c94a;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(240, 201, 74, 0.6), 0 0 50px rgba(100, 180, 255, 0.3);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitulo-lk {
+            font-family: Georgia, serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #9db4d8;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(100, 180, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- MENÚ DE BOTONES (ESTILO WOW) --- */
+        .contenedor-botones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            padding: 20px;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
+        .btn-wow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 220px;
+            height: 90px;
+            background: linear-gradient(180deg, rgba(20, 40, 80, 0.9) 0%, rgba(10, 20, 40, 0.9) 100%);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            color: #f0c94a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-wow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-wow:hover {
+            transform: translateY(-5px);
+            border-color: #f0c94a;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-wow:hover::before {
+            opacity: 1;
+        }
+
+        .btn-icono {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 5px rgba(240, 201, 74, 0.5));
+        }
+
+        .btn-texto {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- CONTENIDO CENTRAL --- */
+        .contenido {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .contenido h2 {
+            color: #e6e8ee;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .contenido p {
+            color: #9db4d8;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #7a8590;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(5, 10, 20, 0.8);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .contenedor-botones { gap: 15px; }
+            .btn-wow { width: 100%; max-width: 300px; height: 80px; }
+            header { padding: 40px 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <h1>AzerothCore</h1>
+        <div class="subtitulo-lk">Wrath of the Lich King</div>
+    </header>
+
+    <!-- BOTONES DE DESCARGA Y ACCESO -->
+    <div class="contenedor-botones">
+        
+        <!-- ⚠️ AQUÍ DEBES PONER TUS ENLACES REALES ⚠️ -->
+
+        <!-- 1. Jugar / Registro (Pon la URL de tu web PHP) -->
+        <a href="https://TU-DOMINIO-AQUI.com/index.php" class="btn-wow" target="_blank">
+            <span class="btn-icono">🎮</span>
+            <span class="btn-texto">Crear Cuenta / Jugar</span>
+        </a>
+
+        <!-- 2. Descargar Cliente (Pon el enlace de Mega o Drive) -->
+        <a href="TU_ENLACE_DE_MEGA_O_GOOGLE_DRIVE" class="btn-wow" target="_blank">
+            <span class="btn-icono">💾</span>
+            <span class="btn-texto">Descargar Cliente</span>
+        </a>
+
+        <!-- 3. Descargar Addons (Pon el enlace de tus addons) -->
+        <a href="TU_ENLACE_DE_ADDONS" class="btn-wow" target="_blank">
+            <span class="btn-icono">🧩</span>
+            <span class="btn-texto">Descargar Addons</span>
+        </a>
+
+        <!-- 4. Guías (Pon la URL de tus guías PHP) -->
+        <a href="https://TU-DOMINIO-AQUI.com/guias.php" class="btn-wow" target="_blank">
+            <span class="btn-icono">📖</span>
+            <span class="btn-texto">Guías de Juego</span>
+        </a>
+    </div>
+
+    <!-- TEXTO INFORMATIVO -->
+    <div class="contenido">
+        <h2>¡Bienvenido a Azeroth!</h2>
+        <p>El Rey Exánime te espera. Sumérgete en la experiencia definitiva de Wrath of the Lich King 3.3.5a. Con rates x1, scripts personalizados y una comunidad activa, cada paso que des te acercará a la gloria. Descarga el cliente y forja tu leyenda.</p>
+        
+        <p style="font-size: 0.9rem; color: #d4af37;">
+            * Recuerda cambiar el archivo <b>realmlist.wtf</b> a: <br>
+            <strong>set realmlist logon.azeroth-web.com</strong>
+        </p>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        &copy; 2026 AzerothCore Server. Hecho con ❤ para la comunidad.
+    </footer>
+
+</body>
+</html>
