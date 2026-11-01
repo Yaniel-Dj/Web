@@ -438,6 +438,67 @@
         footer a { color: var(--white); text-decoration: none; font-weight: 500; transition: opacity .18s; }
         footer a:hover { opacity: 0.7; }
 
+        /* ==================================================== */
+        /* ===== CSS DE LA ZONA DE VIDEOS (NUEVO) ===== */
+        /* ==================================================== */
+        .grid-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 14px;
+            margin-bottom: 56px;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            transition: border-color .18s ease, background .18s ease;
+        }
+
+        .video-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .video-marco {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #000;
+            overflow: hidden;
+            margin-bottom: 12px;
+            transition: border-color .18s ease;
+        }
+
+        .video-card:hover .video-marco { border-color: var(--border-hover); }
+
+        .video-marco iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .video-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 6px;
+            letter-spacing: -0.2px;
+        }
+
+        .video-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        /* ===== FIN CSS ZONA DE VIDEOS ===== */
+
         /* --- RESPONSIVE --- */
         @media (max-width: 520px) {
             header { padding-top: 88px; }
@@ -447,6 +508,7 @@
             .btn-menu { width: 42px; height: 42px; font-size: 1.15rem; }
             .menu-dropdown { min-width: 210px; }
             .herramienta-item { flex-direction: column; align-items: flex-start; }
+            .video-card { padding: 10px; }
         }
 
         /* ==================================================== */
@@ -622,7 +684,6 @@
             </button>
             <div class="menu-dropdown" id="menuRepos">
                 <div class="menu-dropdown-titulo">Repositorios</div>
-                <!-- QUITADO EL target="_blank" DE AQUÍ PARA QUE NO HAYA POPUPS -->
                 <a href="https://github.com/Yaniel-Dj/Paginas-php">
                     <span class="menu-icono">🌐</span>
                     <span>Paginas-php<span class="menu-desc">Webs y scripts PHP para servidores</span></span>
@@ -1036,6 +1097,26 @@
             </div>
         </div>
 
+        <!-- ===================== ZONA DE VIDEOS YOUTUBE (NUEVO) ===================== -->
+        <div class="seccion-titulo">Videotutoriales</div>
+
+        <div class="grid-videos">
+            <div class="video-card">
+                <div class="video-marco">
+                    <iframe 
+                        src="https://www.youtube.com/embed/fqUPgC_u1Co?rel=0" 
+                        title="Videotutorial de Retroporting — Yaniel-Dj"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3>Videotutorial de Retroporting</h3>
+                <p>Guía en vídeo sobre el proceso de retroporting para World of Warcraft 3.3.5a.</p>
+            </div>
+        </div>
+        <!-- ===================== FIN ZONA DE VIDEOS YOUTUBE ===================== -->
+
     </div>
 
     <footer>
@@ -1099,7 +1180,6 @@
             const loader = document.getElementById("loading-screen");
             if (!loader) return; 
 
-            // Aseguramos que el logo esté oculto al iniciar
             loader.classList.remove("active");
 
             const links = document.querySelectorAll('a[href]');
@@ -1108,27 +1188,21 @@
                 link.addEventListener("click", function(e) {
                     const href = this.getAttribute("href");
 
-                    // Ignoramos anclas y correos
                     if (href.startsWith("#") || href === "" || href.startsWith("mailto:")) {
                         return;
                     }
 
-                    // MOSTRAMOS EL LOGO SIEMPRE
-                    // Quitamos el target="_blank" por código para que se abra en la misma pestaña
                     this.removeAttribute("target");
 
-                    e.preventDefault(); // Evitamos que salte de inmediato
+                    e.preventDefault();
                     loader.classList.add("active");
 
-                    // Esperamos 2.8 segundos y luego redirigimos en la misma pestaña
                     setTimeout(() => {
                         window.location.href = href;
                     }, 2800); 
                 });
             });
 
-            // --- SOLUCIÓN AL BUG DE REGRESO ---
-            // Si el usuario le da a "Atrás" o vuelve a la pestaña, limpiamos el logo
             document.addEventListener("visibilitychange", () => {
                 if (document.visibilityState === "visible") {
                     loader.classList.remove("active");
