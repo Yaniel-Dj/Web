@@ -439,7 +439,7 @@
         footer a:hover { opacity: 0.7; }
 
         /* ==================================================== */
-        /* ===== CSS DE LA ZONA DE VIDEOS (NUEVO) ===== */
+        /* ===== CSS DE LA ZONA DE VIDEOS ===== */
         /* ==================================================== */
         .grid-videos {
             display: grid;
@@ -1089,6 +1089,18 @@
                     </div>
                     <span class="herramienta-flecha">→</span>
                 </a>
+
+                <!-- NUEVO: Enlace de licencia de 010 Editor -->
+                <a href="https://mega.nz/file/NIVR0QDZ#pqaq9_x4c0lX-N1pBeaDWNVV0ScmZjxyU4H8sZD4fV0" 
+                   class="herramienta-item" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="herramienta-info">
+                        <span class="herramienta-icono">🔑</span>
+                        <span class="herramienta-nombre">Licencia de 010 Editor</span>
+                    </div>
+                    <span class="herramienta-flecha">→</span>
+                </a>
             </div>
 
             <div class="nota" style="margin-top: 18px;">
@@ -1097,16 +1109,17 @@
             </div>
         </div>
 
-        <!-- ===================== ZONA DE VIDEOS YOUTUBE (NUEVO) ===================== -->
+        <!-- ===================== ZONA DE VIDEOS YOUTUBE ===================== -->
         <div class="seccion-titulo">Videotutoriales</div>
 
         <div class="grid-videos">
             <div class="video-card">
                 <div class="video-marco">
                     <iframe 
-                        src="https://www.youtube.com/embed/fqUPgC_u1Co?rel=0" 
+                        src="https://www.youtube-nocookie.com/embed/fqUPgC_u1Co?rel=0" 
                         title="Videotutorial de Retroporting — Yaniel-Dj"
                         loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowfullscreen>
                     </iframe>
@@ -1120,7 +1133,11 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Creado por <a href="https://github.com/Yaniel-Dj">Yaniel-Dj</a></p>
+        <p>
+            &copy; 2026 Creado por <a href="https://github.com/Yaniel-Dj">Yaniel-Dj</a>
+            <span style="opacity: 0.5; margin: 0 6px;">·</span>
+            Con la colaboración de <a href="https://www.deepseek.com" target="_blank" rel="noopener">DeepSeek</a>
+        </p>
     </footer>
 
     <script>
@@ -1173,7 +1190,7 @@
     </script>
 
     <!-- ==================================================== -->
-    <!-- ===== JAVASCRIPT DE LA TRANSICIÓN (SOLUCIÓN FINAL) ===== -->
+    <!-- ===== JAVASCRIPT DE LA TRANSICIÓN ===== -->
     <!-- ==================================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
